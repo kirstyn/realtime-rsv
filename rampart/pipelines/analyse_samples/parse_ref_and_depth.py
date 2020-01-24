@@ -36,6 +36,8 @@ def count_and_return_analysis_dict(report,csv_out,sample):
     counts = OrderedDict()
     counts["RSVA"]=0
     counts["RSVB"]=0
+    counts["*"]=0
+    counts["?"]=0
 
     detail_dict= {
         "RSVA": Counter(),
