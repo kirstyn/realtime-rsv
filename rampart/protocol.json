@@ -1,5 +1,5 @@
 {
-  "name": "ARTIC Ebola virus protocol v2.0",
-  "description": "Amplicon based sequencing of Ebola virus (Zaire species).",
-  "url": "http://artic.network/"
-}
+    "name": "Minion RSV protocol",
+    "description": "Amplicon based sequencing of RSV"
+  }
+  
