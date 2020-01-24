@@ -1,7 +1,7 @@
 # realtime-rsv
 This pipeline complements [``RAMPART``](https://github.com/artic-network/rampart) and continues downstream analysis to consensus level.
 
-<img src="https://github.com/aineniamh/realtime_rsv/blob/master/rampart/figures/rampart_rsv.png">
+<img src="https://github.com/aineniamh/realtime-rsv/blob/master/rampart/figures/rampart_rsv.png">
 
 ## Table of contents
 
