@@ -4,8 +4,7 @@ from collections import OrderedDict
 from collections import Counter
 from collections import defaultdict
 import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+
 import sys
 import csv
 
@@ -35,24 +34,12 @@ def make_ref_dict(references):
 def count_and_return_analysis_dict(report,csv_out,sample):
 
     counts = OrderedDict()
-    counts["Sabin1"]=0
-    counts["Sabin2"]=0
-    counts["Sabin3"]=0
-    counts["Poliovirus1-wt"]=0
-    counts["Poliovirus2-wt"]=0
-    counts["Poliovirus3-wt"]=0
-    counts["NonPolioEV"]=0
-    counts["*"]=0
-    counts["?"]=0
+    counts["RSVA"]=0
+    counts["RSVB"]=0
 
     detail_dict= {
-        "Sabin1": Counter(),
-        "Sabin2": Counter(),
-        "Sabin3": Counter(),
-        "Poliovirus1-wt": Counter(),
-        "Poliovirus2-wt": Counter(),
-        "Poliovirus3-wt": Counter(),
-        "NonPolioEV": Counter(),
+        "RSVA": Counter(),
+        "RSVB": Counter(),
         "*": Counter(),
         "?": Counter()
     }
@@ -74,7 +61,7 @@ def count_and_return_analysis_dict(report,csv_out,sample):
 
     analysis_dict = {}
     for key in counts:
-        if key not in ['*',"?","NonPolioEV"]:
+        if key not in ['*',"?"]:
             if counts[key] > args.min_reads and 100*(counts[key]/total)> args.min_pcent:
             
                 top = detail_dict[key].most_common()[0]
