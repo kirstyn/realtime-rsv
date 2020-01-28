@@ -46,13 +46,28 @@ else:
     raise ValueError("Please provide a barcodes.csv or run_configuration.json")
 
 
+##### Function Definitions #####
+
+def write_csv_files_with_only_one_header(csv_files, output_file):
+    write_headers = True
+    with open(output_file, 'w') as fw:
+        for csv_file in csv_files:
+            with open(csv_file) as fr:
+                for l in fr:
+                    l = l.rstrip('\n')
+                    if write_headers:
+                        write_headers = False
+                        if l.startswith("read_name"):
+                            fw.write(l + '\n')
+                    else:
+                        fw.write(l + '\n')
+
 
 ##### Workflow #####
 
 rule all:
     input:
         expand(config["output_path"] + "/consensus_sequences/{sample}.fasta",sample=samples),
-        expand(config["output_path"] + "/reports/{sample}.report.md",sample=samples),
         expand(config["output_path"] + "/binned_{sample}.csv",sample=samples),
         config["output_path"] + "/sample_composition_summary.csv"
 
@@ -87,48 +102,40 @@ rule rename_to_samples:
     params:
         output_prefix = config["output_path"] + "/temp/binned",
         samples = samples,
-        sample = "{sample}"
+        output_path = config["output_path"]
     output:
-        reads=config["output_path"] + "/binned_{sample}.fastq",
-        csv=config["output_path"] + "/binned_{sample}.csv"
+        reads=expand(config["output_path"] + "/binned_{sample}.fastq", sample = samples),
+        csv=expand(config["output_path"] + "/binned_{sample}.csv", sample = samples)
     run:
         for sample in params.samples:
-            if sample == params.sample:
-                read_str = ''
-                csv_list = []
-                for barcode in list(params.samples[sample]):
-                    print("Mapping {} to {}".format(sample, barcode))
+            barcodes = list(params.samples[sample])
+            read_str = ''
+            csv_list = []
+            print("Mapping {} to {}".format(barcodes, sample))
 
-                    read_file = params.output_prefix + "_" + barcode + ".fastq"
-                    csv_file = params.output_prefix + "_" + barcode + ".csv"
+            for barcode in barcodes:
+                read_file = params.output_prefix + "_" + barcode + ".fastq"
+                csv_file = params.output_prefix + "_" + barcode + ".csv"
 
-                    read_str+=read_file + ' '
-                
-                    csv_list.append(csv_file)
-
-                shell("cat " + read_str + ">" + output.reads)
-
-                if len(csv_list) > 1:
-                    write_headers = True
-                    with open(output.csv, 'w') as fw:
-                        for csv_file in csv_list:
-                            with open(csv_file) as fr:
-                                for l in fr:
-                                    l = l.rstrip('\n')
-                                    if write_headers:
-                                        write_headers = False
-                                        if l.startswith("read_name"):
-                                            fw.write(l + '\n')
-                                    else:
-                                        fw.write(l + '\n')
-                else:
-                    shell("cp " + csv_list[0] + " " + output.csv)
+                read_str+=read_file + ' '
             
+                csv_list.append(csv_file)
+
+            output_reads = params.output_path + "/binned_" + sample + ".fastq"
+            output_csv = params.output_path + "/binned_" + sample + ".csv"
+
+            shell("cat " + read_str + "> " + output_reads)
+
+            if len(csv_list) > 1:
+                write_csv_files_with_only_one_header(csv_list, output_csv)
+            else:
+                shell("cp " + csv_list[0] + " " + output_csv)
             
+
 rule assess_sample:
     input:
-        reads= rules.rename_to_samples.output.reads,
-        csv= rules.rename_to_samples.output.csv,
+        reads= config["output_path"] + "/binned_{sample}.fastq",
+        csv= config["output_path"] + "/binned_{sample}.csv",
         refs = workflow.current_basedir +"/../../references.fasta"
     params:
         sample = "{sample}",
@@ -162,8 +169,7 @@ rule process_sample:
         output_path= config["output_path"],
         path = workflow.current_basedir
     output:
-        cns = config["output_path"] + "/consensus_sequences/{sample}.fasta",
-        reports = config["output_path"] + "/reports/{sample}.report.md"
+        cns = config["output_path"] + "/consensus_sequences/{sample}.fasta"
     run:
         analysis_stem = stems.fetch(params.sample)
         print(params.sample, analysis_stem)
@@ -179,7 +185,7 @@ rule process_sample:
                         "sample={params.sample} "
                         "--rerun-incomplete")
         else:
-            shell("touch {output.cns} && touch {output.reports}")
+            shell("touch {output.cns} ")
 
 rule cat_sample_reports:
     input:
@@ -189,7 +195,7 @@ rule cat_sample_reports:
         temp_report = temp(config["output_path"] + "/temp/temp.csv")
     run:
         with open(output.temp_report,"w") as fw:
-            fw.write("Sample,Sabin1,Sabin2,Sabin3,Poliovirus1-wt,Poliovirus2-wt,Poliovirus3-wt,NonPolioEV,Unmapped,AmbiguousMapping\n")
+            fw.write("Sample,RSVA,RSVB,Unmapped,AmbiguousMapping\n")
         file_string = ' '.join(input)
         shell("cat {output.temp_report} " + file_string + " > {output.csv}")
         for i in input:
