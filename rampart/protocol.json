@@ -2,7 +2,7 @@
     "name": "Minion RSV protocol",
     "description": "Amplicon based sequencing of RSV",
     "displayOptions": {
-        "reference_fields":"display_name[display_name]"
+        "referencesLabel":"display_name"
     },
     "annotationOptions":{
         "reference_fields":"display_name[display_name]",
