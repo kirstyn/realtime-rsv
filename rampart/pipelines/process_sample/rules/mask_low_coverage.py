@@ -20,7 +20,6 @@ def load_cns(cns):
         my_record = record
     return my_record, len(my_record)
 
-
 """
 to estimate coverage, for the cns- have a list [0, len(cns)] of counters that 
 increments by one if there is a read mapped over that site.

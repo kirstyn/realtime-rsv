@@ -217,7 +217,7 @@ rule medaka:
     threads:
         2
     shell:
-        "medaka_consensus -i {input.basecalls} -d {input.draft} -o {params.outdir} -t 2 || touch {output}"
+        "medaka_consensus -i {input.basecalls} -d {input.draft} -o {params.outdir} -f -t 2 || touch {output}"
 
 rule mafft5:
     input:
@@ -247,12 +247,4 @@ rule clean5:
         "--name {params.seq_name} "
         "--output_seq {output} "
         "--polish_round medaka"
-
-rule gather_files:
-    input:
-        expand(config["output_path"] +  "/binned_{{sample}}/{analysis_stem}.consensus.fasta", analysis_stem=config["analysis_stem"])
-    output:
-        config["output_path"] + "/consensus_sequences/{sample}.fasta"
-    shell:
-        "cat {input} > {output}"
 

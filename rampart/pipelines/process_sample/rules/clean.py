@@ -15,6 +15,8 @@ if args.round:
     round_name = f" round_name={args.round}"
 
 def trim_trailing_gaps(alignment):
+    start_position = 0
+    end_position = 0
     for col in range(alignment.get_alignment_length()):
         if not "-" in alignment[:, col]:
             start_position = col

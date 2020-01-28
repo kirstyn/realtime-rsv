@@ -12,44 +12,24 @@ rule mask_low_coverage_regions:
         cns = rules.clean5.output,
         paf = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.mapped.paf"
     params:
-        path_to_script = workflow.current_basedir
+        path_to_script = workflow.current_basedir,
+        min_reads = config["min_reads"]
     output:
-        config["output_path"] +"/binned_{sample}/consensus_sequences/{analysis_stem}.masked.fasta"
+        config["output_path"] +"/binned_{sample}/medaka/{analysis_stem}/consensus_masked.fasta"
     shell:
         """
         python {params.path_to_script}/mask_low_coverage.py \
         --cns {input.cns} \
         --paf {input.paf} \
-        --min_coverage 100 \
+        --min_coverage 30 \
         --masked_cns {output}
         """
 
-rule cat_stems:
+rule gather_files:
     input:
-        expand(config["output_path"] +"/binned_{{sample}}/consensus_sequences/{analysis_stem}.masked.fasta",analysis_stem=config["analysis_stem"])
-    output:
-        config["output_path"] + "/consensus_sequences/{sample}.split.fasta"
-    shell:
-        "cat {input} > {output}"
-
-rule aln_to_merge:
-    input:
-        config["output_path"] + "/consensus_sequences/{sample}.split.fasta"
-    output:
-        config["output_path"] + "/consensus_sequences/{sample}.split.aln.fasta"
-    shell:
-        "mafft {input} > {output}"
-
-rule merge:
-    input:
-        rules.aln_to_merge.output
-    params:
-        path_to_script = workflow.current_basedir
+        expand(config["output_path"] +"/binned_{{sample}}/medaka/{analysis_stem}/consensus_masked.fasta", analysis_stem=config["analysis_stem"])
     output:
         config["output_path"] + "/consensus_sequences/{sample}.fasta"
     shell:
-        """
-        python {params.path_to_script}/merge.py \
-        -i {input} \
-        -o {output} 
-        """
+        "cat {input} > {output}"
+
