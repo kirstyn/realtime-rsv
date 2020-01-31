@@ -1,7 +1,8 @@
+
 rule map_to_cns:
     input:
-        cns = rules.clean5.output,
-        reads = rules.files.params.reads
+        cns = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.fasta",
+        reads = config["output_path"]+"/binned_{sample}/{analysis_stem}.primer_trimmed.fastq"
     output:
         paf = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.mapped.paf"
     shell:
@@ -9,7 +10,7 @@ rule map_to_cns:
 
 rule mask_low_coverage_regions:
     input:
-        cns = rules.clean5.output,
+        cns = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.fasta",
         paf = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.mapped.paf"
     params:
         path_to_script = workflow.current_basedir,

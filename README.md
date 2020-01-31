@@ -5,7 +5,6 @@ This pipeline complements [``RAMPART``](https://github.com/artic-network/rampart
 
 ## Table of contents
 
-
   * [Requirements](#requirements)
   * [Installation](#installation)
   * [Setting up your run](#setting-up-your-run)
