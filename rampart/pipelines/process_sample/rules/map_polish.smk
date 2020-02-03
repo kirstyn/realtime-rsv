@@ -219,32 +219,61 @@ rule medaka:
     shell:
         "medaka_consensus -i {input.basecalls} -d {input.draft} -o {params.outdir} -f -t 2 || touch {output}"
 
-# rule mafft5:
-#     input:
-#        fasta = rules.medaka.output,
-#        ref = rules.files.params.ref
-#     params:
-#         temp_file = config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/temp.medaka.fasta"
-#     output:
-#         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/medaka.aln.fasta"
-#     shell:
-#         "cat {input.ref} {input.fasta} > {params.temp_file} && "
-#         "mafft {params.temp_file} > {output} && "
-#         "rm {params.temp_file}"
+rule join_contigs_if_split:
+    input:
+        config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.fasta"
+    output:
+        config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta"
+    run:
+        joined_seq = ""
+        start, end = 0,0
+        last_end = 0
 
-# rule clean5:
-#     input:
-#         aln = rules.mafft5.output,
-#         cns = rules.medaka.output
-#     params:
-#         path_to_script = workflow.current_basedir,
-#         seq_name = "{analysis_stem}"
-#     output:
-#         config["output_path"] + "/binned_{sample}/{analysis_stem}.consensus.fasta"
-#     shell:
-#         "python {params.path_to_script}/clean.py "
-#         "--alignment_with_ref {input.aln} "
-#         "--name {params.seq_name} "
-#         "--output_seq {output} "
-#         "--polish_round medaka"
+        with open(output[0],"w") as fw:
+
+            for record in SeqIO.parse(input[0],"fasta"):
+
+                name = record.description.split(":")[0]
+                start,end = [float(i) for i in record.description.split(":")[1].split("-")]
+
+                if not joined_seq:
+                    joined_seq +="N"*int(start)
+                    last_end = end
+                else:
+                    gap = int(start-last_end)
+                    joined_seq +="N"*int(gap)
+                    last_end = end
+                joined_seq += record.seq
+                
+            fw.write(f">{name}\n{joined_seq}\n") 
+
+
+rule mafft5:
+    input:
+       fasta = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta",
+       ref = rules.files.params.ref
+    params:
+        temp_file = config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/temp.medaka.fasta"
+    output:
+        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/medaka.aln.fasta"
+    shell:
+        "cat {input.ref} {input.fasta} > {params.temp_file} && "
+        "mafft {params.temp_file} > {output} && "
+        "rm {params.temp_file}"
+
+rule clean5:
+    input:
+        aln = rules.mafft5.output,
+        cns = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta"
+    params:
+        path_to_script = workflow.current_basedir,
+        seq_name = "{analysis_stem}"
+    output:
+        config["output_path"] + "/binned_{sample}/{analysis_stem}.consensus.fasta"
+    shell:
+        "python {params.path_to_script}/clean.py "
+        "--alignment_with_ref {input.aln} "
+        "--name {params.seq_name} "
+        "--output_seq {output} "
+        "--polish_round medaka"
 
