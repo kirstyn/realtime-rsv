@@ -20,7 +20,7 @@ rule racon1:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon1.fasta"
     shell:
-        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 rule mafft1:
     input:
@@ -68,7 +68,7 @@ rule racon2:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon2.fasta"
     shell:
-        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 
 rule mafft2:
@@ -117,7 +117,7 @@ rule racon3:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon3.fasta"
     shell:
-        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 rule mafft3:
     input:
@@ -166,7 +166,7 @@ rule racon4:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon4.fasta"
     shell:
-        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 rule mafft4:
     input:
