@@ -32,7 +32,6 @@ def make_ref_dict(references):
     return refs
 
 def count_and_return_analysis_dict(report,csv_out,sample):
-
     counts = OrderedDict()
     counts["RSVA"]=0
     counts["RSVB"]=0
@@ -47,7 +46,6 @@ def count_and_return_analysis_dict(report,csv_out,sample):
     }
 
     total = 0
-
     with open(str(report),"r") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -88,7 +86,6 @@ if __name__ == '__main__':
     ref_dict = make_ref_dict(str(args.references))
 
     csv_report = open(str(args.out_counts), "w")
-
     analysis_dict,read_dict = count_and_return_analysis_dict(args.csv, csv_report, args.sample)
 
     for ref in analysis_dict:
