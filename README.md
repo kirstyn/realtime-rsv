@@ -1,7 +1,6 @@
-# realtime-rsv
-This pipeline complements [``RAMPART``](https://github.com/artic-network/rampart) and continues downstream analysis to consensus level.
-
-<img src="https://github.com/aineniamh/realtime-rsv/blob/master/rampart/figures/rampart_rsv.png">
+# realtime-rabies
+This pipeline is forked from [``realtime-rsv``] (https://github.com/aineniamh/realtime-rsv) and complements [``RAMPART``](https://github.com/artic-network/rampart). 
+The pipeline is currently in development 
 
 ## Table of contents
 
