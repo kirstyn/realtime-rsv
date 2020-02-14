@@ -1,5 +1,5 @@
 # realtime-rabies
-This pipeline is forked from ``realtime-rsv``(https://github.com/aineniamh/realtime-rsv) and complements [``RAMPART``](https://github.com/artic-network/rampart). 
+This pipeline is forked from [``realtime-rsv``](https://github.com/aineniamh/realtime-rsv) and complements [``RAMPART``](https://github.com/artic-network/rampart). 
 The pipeline is currently in development 
 
 ## Table of contents
