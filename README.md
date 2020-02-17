@@ -25,21 +25,21 @@ This pipeline will run on MacOS and Linux. An install of Miniconda will make the
 Clone this repository:
 
 ```
-git clone https://github.com/aineniamh/realtime-rsv.git
+git clone https://github.com/kirstyn/realtime-rabies.git
 ```
 
 1. Create the conda environment.
 This may take some time, but will only need to be done once. It allows the pipeline to access all the software it needs, including RAMPART.
 
 ```
-cd realtime-rsv
+cd realtime-rabies
 conda env create -f environment.yml
 ```
 
 2. Activate the conda environment.
 
 ```
-conda activate realtime-rsv
+conda activate realtime-rabies
 ```
 
 ## Setting up your run
@@ -59,16 +59,16 @@ run_configuration.json
 }
 ```
 
-Optional for RAMPART, but required for the downstream analysis pipeline, the ``barcodes.csv`` file describes which barcode corresponds to which sample. Note that you can have more than one barcode for each sample, but they will be merged in the analysis.
+Optional for RAMPART, but required for the downstream analysis pipeline, the ``barcodes.csv`` file describes which barcode corresponds to which sample. Note that you can have more than one barcode for each sample, but they will be merged in the analysis. [Do not include spaces in sample names]
 
 ```
 barcodes.csv
 
 sample,barcode
-sample1,BC01
-sample2,BC02
-sample3,BC03
-sample4,BC04
+sample1,NB01
+sample2,NB02
+sample3,NB03
+sample4,NB04
 ```
 
 ## Checklist
@@ -93,8 +93,10 @@ Where `[run_name]` is whatever you are calling todays run (as specified in MinKN
 With this setup, to run RAMPART:
 
 ```
-rampart --protocol path/to/realtime-rsv/rampart --referencesLabel display_name
+rampart --protocol path/to/realtime-rabies/rampart 
 ```
+
+# Development notes: Might add - --referencesLabel display_name
 
 Open a web browser to view [http://localhost:3000](http://localhost:3000)
 
