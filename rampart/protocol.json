@@ -1,6 +1,7 @@
 {
-    "name": "Minion RSV protocol",
-    "description": "Amplicon based sequencing of RSV",
+    "name": "Rabies protocol",
+    "description": "Amplicon based sequencing of rabies virus.",
+    "url": "https://wellcomeopenresearch.org/articles/5-3",
     "displayOptions": {
         "referencesLabel":"display_name"
     },
@@ -9,6 +10,4 @@
         "reference_fields":"display_name[display_name]",
         "barcode_set":"native"
         }
-    
   }
-  

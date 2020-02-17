@@ -1,4 +1,4 @@
-name: realtime-rsv
+name: realtime-rabies
 channels:
   - bioconda
   - conda-forge
