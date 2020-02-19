@@ -59,7 +59,13 @@ run_configuration.json
 }
 ```
 
-Optional for RAMPART, but required for the downstream analysis pipeline, the ``barcodes.csv`` file describes which barcode corresponds to which sample. Note that you can have more than one barcode for each sample, but they will be merged in the analysis. [Do not include spaces in sample names]
+Optional for RAMPART, but required for the downstream analysis pipeline, the ``barcodes.csv`` file describes which barcode corresponds to which sample. Note that you can have more than one barcode for each sample, but they will be merged in the analysis.
+
+Rules for sample names:  
+- Do not include spaces in sample names  
+- Must contain letter (not just numbers)  
+- Standard formatting= sampleid_year_countrycode_runname  
+
 
 ```
 barcodes.csv

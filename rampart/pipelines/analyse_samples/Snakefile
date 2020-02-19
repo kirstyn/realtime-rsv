@@ -195,7 +195,7 @@ rule cat_sample_reports:
         temp_report = temp(config["output_path"] + "/temp/temp.csv")
     run:
         with open(output.temp_report,"w") as fw:
-            fw.write("Sample,RSVA,RSVB,Unmapped,AmbiguousMapping\n")
+            fw.write("Sample,RABV_PER,RABV_BRA,RABV_PHL,RABV_TZA,Unmapped,AmbiguousMapping\n")
         file_string = ' '.join(input)
         shell("cat {output.temp_report} " + file_string + " > {output.csv}")
         for i in input:
