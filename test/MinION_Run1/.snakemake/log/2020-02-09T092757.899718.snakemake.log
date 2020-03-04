@@ -1,0 +1,9 @@
+AttributeError in line 40 of /home/kirstyn/miniconda3/envs/realtime-noro/lib/node_modules/artic-rampart/default_protocol/pipelines/bin_to_fastq/Snakefile:
+'collections.OrderedDict' object has no attribute 'read'
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/node_modules/artic-rampart/default_protocol/pipelines/bin_to_fastq/Snakefile", line 40, in <module>
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/python3.6/site-packages/yaml/__init__.py", line 162, in safe_load
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/python3.6/site-packages/yaml/__init__.py", line 112, in load
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/python3.6/site-packages/yaml/loader.py", line 34, in __init__
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/python3.6/site-packages/yaml/reader.py", line 85, in __init__
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/python3.6/site-packages/yaml/reader.py", line 124, in determine_encoding
+  File "/home/kirstyn/miniconda3/envs/realtime-noro/lib/python3.6/site-packages/yaml/reader.py", line 178, in update_raw

@@ -1,5 +1,4 @@
 import yaml 
-import csv
 from pytools.persistent_dict import PersistentDict
 
 ##### Configuration #####
@@ -16,7 +15,9 @@ if config.get("output_path"):
 else:
     config["output_path"] = "analysis"
 
+
 stems = PersistentDict("stem_store")
+
 
 samples = {}
 barcode_string = ''
@@ -63,13 +64,13 @@ def write_csv_files_with_only_one_header(csv_files, output_file):
                         fw.write(l + '\n')
 
 
-##### Workflow #####
+##### Master workflow #####
 
 rule all:
     input:
         expand(config["output_path"] + "/consensus_sequences/{sample}.fasta",sample=samples),
-        expand(config["output_path"] + "/binned_{sample}.csv",sample=samples),
-        config["output_path"] + "/sample_composition_summary.csv"
+        expand(config["output_path"] + "/binned_{sample}.csv",sample=samples)
+        # config["output_path"] + "/sample_composition_summary.csv"
 
 rule binlorry:
     input:
@@ -130,32 +131,49 @@ rule rename_to_samples:
                 write_csv_files_with_only_one_header(csv_list, output_csv)
             else:
                 shell("cp " + csv_list[0] + " " + output_csv)
-            
+
+
+rule assign_amplicon:
+    input:
+        csv= config["output_path"] + "/binned_{sample}.csv",
+        amplicons = workflow.current_basedir +"/../../primer_file.csv"
+    params:
+        sample = "{sample}",
+        path_to_script = workflow.current_basedir
+    output:
+        config["output_path"] + "/binned_{sample}.amp_info.csv"
+    shell:
+        """
+        python {params.path_to_script}/assign_amplicon.py \
+        --csv {input.csv} \
+        --out_csv {output} \
+        --amplicons {input.amplicons}
+        """
 
 rule assess_sample:
     input:
         reads= config["output_path"] + "/binned_{sample}.fastq",
-        csv= config["output_path"] + "/binned_{sample}.csv",
+        csv= rules.assign_amplicon.output,
         refs = workflow.current_basedir +"/../../references.fasta"
     params:
         sample = "{sample}",
         output_path = config["output_path"] + "/binned_{sample}",
         min_reads = config["min_reads"],
         min_pcent = config["min_pcent"],
+        bin_factor = config["bin_factor"],
         path_to_script = workflow.current_basedir
     output:
-        t = temp(config["output_path"] + "/binned_{sample}/temp.txt"),
-        summary = config["output_path"] + "/temp/temp_{sample}_report.txt"
+        t = temp(config["output_path"] + "/binned_{sample}/temp.txt")
     run:
         for stdout_line in shell(
-            "python {params.path_to_script}/parse_ref_and_depth.py "
+            "python {params.path_to_script}/parse_noro_ref_and_depth.py "
             "--reads {input.reads} "
             "--csv {input.csv} "
             "--output_path {params.output_path} "
-            "--references {input.refs} "
+            "--bin_factor {params.bin_factor} "
             "--min_reads {params.min_reads} "
             "--min_pcent {params.min_pcent} "
-            "--out_counts {output.summary} "
+            "--references {input.refs} "
             "--sample {params.sample}  && touch {output.t}", iterable=True):
             print(stdout_line)
             stems.store(params.sample,stdout_line)
@@ -172,31 +190,14 @@ rule process_sample:
         cns = config["output_path"] + "/consensus_sequences/{sample}.fasta"
     run:
         analysis_stem = stems.fetch(params.sample)
-        print(params.sample, analysis_stem)
-
         if analysis_stem != "":
-            print("Passing {} for {} into processing pipeline.".format(analysis_stem, params.sample))
+            print("Passing {} into processing pipeline.".format(analysis_stem))
             config["analysis_stem"]= analysis_stem
             shell("snakemake --nolock --snakefile {params.path}/../process_sample/Snakefile "
                         "--configfile {input.config} "
                         "--config "
                         "analysis_stem={config[analysis_stem]} "
                         "output_path={params.output_path} "
-                        "sample={params.sample} "
-                        "--rerun-incomplete")
+                        "sample={params.sample}")
         else:
-            shell("touch {output.cns} ")
-
-rule cat_sample_reports:
-    input:
-        expand(config["output_path"] + "/temp/temp_{sample}_report.txt", sample=samples)
-    output:
-        csv = config["output_path"] + "/sample_composition_summary.csv",
-        temp_report = temp(config["output_path"] + "/temp/temp.csv")
-    run:
-        with open(output.temp_report,"w") as fw:
-            fw.write("Sample,RABV_PER,RABV_BRA,RABV_PHL,RABV_TZA,Unmapped,AmbiguousMapping\n")
-        file_string = ' '.join(input)
-        shell("cat {output.temp_report} " + file_string + " > {output.csv}")
-        for i in input:
-            shell("rm " + i)
+            print("Not enough reads to pass an analysis stem to processing pipeline.")

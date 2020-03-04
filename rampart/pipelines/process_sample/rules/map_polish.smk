@@ -20,7 +20,7 @@ rule racon1:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon1.fasta"
     shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 rule mafft1:
     input:
@@ -68,7 +68,7 @@ rule racon2:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon2.fasta"
     shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 
 rule mafft2:
@@ -117,7 +117,7 @@ rule racon3:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon3.fasta"
     shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 rule mafft3:
     input:
@@ -166,7 +166,7 @@ rule racon4:
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon4.fasta"
     shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
+        "racon --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
 
 rule mafft4:
     input:
@@ -217,40 +217,11 @@ rule medaka:
     threads:
         2
     shell:
-        "medaka_consensus -i {input.basecalls} -d {input.draft} -o {params.outdir} -f -t 2 || touch {output}"
-
-rule join_contigs_if_split:
-    input:
-        config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus.fasta"
-    output:
-        config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta"
-    run:
-        joined_seq = ""
-        start, end = 0,0
-        last_end = 0
-
-        with open(output[0],"w") as fw:
-
-            for record in SeqIO.parse(input[0],"fasta"):
-
-                name = record.description.split(":")[0]
-                start,end = [float(i) for i in record.description.split(":")[1].split("-")]
-
-                if not joined_seq:
-                    joined_seq +="N"*int(start)
-                    last_end = end
-                else:
-                    gap = int(start-last_end)
-                    joined_seq +="N"*int(gap)
-                    last_end = end
-                joined_seq += record.seq
-                
-            fw.write(f">{name}\n{joined_seq}\n") 
-
+        "medaka_consensus -i {input.basecalls} -d {input.draft} -o {params.outdir} -t 2 || touch {output}"
 
 rule mafft5:
     input:
-       fasta = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta",
+       fasta = rules.medaka.output,
        ref = rules.files.params.ref
     params:
         temp_file = config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/temp.medaka.fasta"
@@ -264,16 +235,15 @@ rule mafft5:
 rule clean5:
     input:
         aln = rules.mafft5.output,
-        cns = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta"
+        cns = rules.medaka.output
     params:
         path_to_script = workflow.current_basedir,
         seq_name = "{analysis_stem}"
     output:
-        config["output_path"] + "/binned_{sample}/{analysis_stem}.consensus.fasta"
+        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/medaka.clean.fasta"
     shell:
         "python {params.path_to_script}/clean.py "
         "--alignment_with_ref {input.aln} "
         "--name {params.seq_name} "
         "--output_seq {output} "
         "--polish_round medaka"
-

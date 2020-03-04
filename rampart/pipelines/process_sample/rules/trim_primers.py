@@ -8,11 +8,18 @@ from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Trim primers.')
+
+    parser.add_argument("--csv", action="store", type=str, dest="in_csv")
     parser.add_argument("--reads", action="store", type=str, dest="reads")
 
     parser.add_argument("--output_reads", action="store", type=str, dest="output_reads")
 
     return parser.parse_args()
+
+def parse_csv(file):
+    reader = csv.DictReader(file)
+    data = [r for r in reader]
+    return data
 
 def file_writer(reads,output_reads,trim):
     trim = int(trim)
