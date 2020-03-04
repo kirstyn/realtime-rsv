@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	binlorry
+	2
+
+[Sun Feb  9 09:30:42 2020]
+rule binlorry:
+    output: /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/binned_Sample2.fastq, /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/binned_Sample2.csv
+    jobid: 1
+    wildcards: sample_name=Sample2
+
+[Sun Feb  9 09:30:42 2020]
+Error in rule binlorry:
+    jobid: 1
+    output: /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/binned_Sample2.fastq, /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/binned_Sample2.csv
+
+RuleException:
+CalledProcessError in line 23 of /home/kirstyn/miniconda3/envs/artic-rabv/lib/node_modules/artic-rampart/default_protocol/pipelines/bin_to_fastq/rules/bin.smk:
+Command 'set -euo pipefail;  binlorry -i /home/kirstyn/Github/realtime-rabies/rabv_example_data/basecalled_050220Test -t /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/annotations -o /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/binned_Sample2 -n 0 -x 1000000 -v 0 --filter-by barcode  NB02 --out-report' returned non-zero exit status 127.
+  File "/home/kirstyn/miniconda3/envs/artic-rabv/lib/node_modules/artic-rampart/default_protocol/pipelines/bin_to_fastq/rules/bin.smk", line 23, in __rule_binlorry
+  File "/home/kirstyn/miniconda3/envs/artic-rabv/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/kirstyn/Github/realtime-rabies/test/MinION_Run1/.snakemake/log/2020-02-09T093042.613023.snakemake.log

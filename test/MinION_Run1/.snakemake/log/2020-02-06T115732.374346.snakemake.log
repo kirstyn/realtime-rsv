@@ -1,0 +1,3 @@
+NameError in line 38 of /home/kirstyn/miniconda3/envs/realtime-rabies/lib/node_modules/artic-rampart/default_protocol/pipelines/bin_to_fastq/Snakefile:
+name 'yaml' is not defined
+  File "/home/kirstyn/miniconda3/envs/realtime-rabies/lib/node_modules/artic-rampart/default_protocol/pipelines/bin_to_fastq/Snakefile", line 38, in <module>

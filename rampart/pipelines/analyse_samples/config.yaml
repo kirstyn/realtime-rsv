@@ -1,12 +1,14 @@
 ##### Where is the data? #####
 
-input_path: path/to/data
+basecalled_path: path/to/data
 annotated_path: annotations
 output_path: analysis
 
 ##### Mapping reference panel #####
 
-references_file: ../../references.fasta
+references_file: "../../references.fasta"
+amplicon_csv: "../../primer_file.csv"
+bin_factor: 
 
 ##### Barcodes to process #####
 
@@ -14,11 +16,11 @@ references_file: ../../references.fasta
 ##### Read length filtering range #####
 
 min_read_length: 400
-max_read_length: 3000
+max_read_length: 2500
 
 ##### Read thresholds #####
 
 min_reads: 20
-min_pcent: 0.005
+min_pcent: 0
 
 ##### Analysis Stem #####

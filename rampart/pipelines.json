@@ -6,10 +6,15 @@
             "processing": true,
             "config_file": "config.yaml",
             "config": " min_reads=20 min_pcent=0.01",
+
             "requires": [
                 {
                     "file": "references.fasta",
                     "config_key": "references_file"
+                },
+                {
+                    "file": "primer_file.csv",
+                    "config_key": "amplicon_csv"
                 }
             ],
             "run_per_sample": true,
@@ -17,6 +22,7 @@
                 "min_read_length": true,
                 "max_read_length": true,
                 "references_file": true,
+                "amplicon_csv": true,
                 "sample_name": true,
                 "barcodes": true,
                 "basecalled_path": true,
