@@ -6,23 +6,21 @@ from Bio import SeqIO
 config["analysis_stem"]=[i for i in config["analysis_stem"].split(',')]
 
 ##### Target rules #####
-config["output_path"] + "/consensus_sequences/{sample}.fasta"
+
 rule all:
     input:
-        expand(config["output_path"] + "/binned_{sample}/consensus_sequences/{analysis_stem}.masked.fasta",sample=config["sample"],analysis_stem=config["analysis_stem"]),
-        expand(config["output_path"] + "/consensus_sequences/{sample}.fasta",sample=config["sample"]),
-        expand(config["output_path"] + "/consensus_sequences/{sample}.split.aln.fasta",sample=config["sample"]),
-        expand(config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.paf",sample=config["sample"],analysis_stem=config["analysis_stem"])
+        expand(config["output_path"] + "/consensus_sequences/{sample}.fasta",sample=config["sample"])
+        # expand(config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.paf",sample=config["sample"],analysis_stem=config["analysis_stem"])
 
 ##### Modules #####
-    
-include: "rules/map_polish.smk"
-include: "rules/mask_low_coverage.smk"
+
+include: "rules/map_polish.smk",
+include: "rules/mask_low_coverage_merge.smk"
+
 
 rule trim_primers:
     input:
-        reads = config["output_path"]+"/binned_{sample}/{analysis_stem}.fastq",
-        csv = config["output_path"] + "/binned_{sample}/{analysis_stem}.csv"
+        reads = config["output_path"]+"/binned_{sample}/{analysis_stem}.fastq"
     params:
         path_to_script = workflow.current_basedir
     output:
@@ -30,16 +28,6 @@ rule trim_primers:
     shell:
         """
         python {params.path_to_script}/rules/trim_primers.py \
-        --csv {input.csv} \
         --reads {input.reads} \
         --output_reads {output}
         """
-
-
-
-
-
-
-
-
-

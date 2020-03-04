@@ -22,7 +22,7 @@ rule mask_low_coverage_regions:
         python {params.path_to_script}/mask_low_coverage.py \
         --cns {input.cns} \
         --paf {input.paf} \
-        --min_coverage 30 \
+        --min_coverage 20 \
         --masked_cns {output}
         """
 
@@ -33,4 +33,3 @@ rule gather_files:
         config["output_path"] + "/consensus_sequences/{sample}.fasta"
     shell:
         "cat {input} > {output}"
-
