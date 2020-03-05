@@ -8,7 +8,6 @@ import pandas as pd
 import sys
 import csv
 
-#Update this for RSV
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Parse mappings, add to headings and create report.')
