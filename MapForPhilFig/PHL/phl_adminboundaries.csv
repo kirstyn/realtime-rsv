@@ -1,0 +1,88 @@
+﻿OBJECTID *,Shape *,admin2Name_en,admin2Pcode,admin2RefName,admin2AltName1_en,admin2AltName2_en,admin1Name_en,admin1Pcode,admin0Name_en,admin0Pcode,date,validOn,ValidTo,Shape_Length,Shape_Area
+1,Polygon,Abra,PH140100000,<Null>,<Null>,<Null>,Cordillera Administrative Region ,PH140000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.640967,0.334223
+2,Polygon,Agusan del Norte,PH160200000,<Null>,<Null>,<Null>,Region XIII ,PH160000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.674955,0.220065
+3,Polygon,Agusan del Sur,PH160300000,<Null>,<Null>,<Null>,Region XIII ,PH160000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.222636,0.693968
+4,Polygon,Aklan,PH060400000,<Null>,<Null>,<Null>,Region VI ,PH060000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.626091,0.139664
+5,Polygon,Albay,PH050500000,<Null>,<Null>,<Null>,Region V ,PH050000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,6.507841,0.205939
+6,Polygon,Antique,PH060600000,<Null>,<Null>,<Null>,Region VI ,PH060000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,6.045478,0.226467
+7,Polygon,Apayao,PH148100000,<Null>,<Null>,<Null>,Cordillera Administrative Region ,PH140000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.20701,0.340498
+8,Polygon,Aurora,PH037700000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,6.75566,0.255767
+9,Polygon,Basilan,PH150700000,<Null>,<Null>,<Null>,Autonomous Region in Muslim Mindanao ,PH150000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,6.925803,0.09273
+10,Polygon,Bataan,PH030800000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.661168,0.104455
+11,Polygon,Batanes,PH020900000,<Null>,<Null>,<Null>,Region II ,PH020000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.140564,0.017443
+12,Polygon,Batangas,PH041000000,<Null>,<Null>,<Null>,Region IV-A ,PH040000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.989473,0.267317
+13,Polygon,Benguet,PH141100000,<Null>,<Null>,<Null>,Cordillera Administrative Region ,PH140000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.194979,0.239829
+14,Polygon,Biliran,PH087800000,<Null>,<Null>,<Null>,Region VIII ,PH080000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,1.780698,0.044083
+15,Polygon,Bohol,PH071200000,<Null>,<Null>,<Null>,Region VII ,PH070000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,9.713699,0.327235
+16,Polygon,Bukidnon,PH101300000,<Null>,<Null>,<Null>,Region X ,PH100000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.019051,0.767607
+17,Polygon,Bulacan,PH031400000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.276276,0.227702
+18,Polygon,Cagayan,PH021500000,<Null>,<Null>,<Null>,Region II ,PH020000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,10.518335,0.750946
+19,Polygon,Camarines Norte,PH051600000,<Null>,<Null>,<Null>,Region V ,PH050000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,6.14392,0.177588
+20,Polygon,Camarines Sur,PH051700000,<Null>,<Null>,<Null>,Region V ,PH050000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,12.538797,0.441585
+21,Polygon,Camiguin,PH101800000,<Null>,<Null>,<Null>,Region X ,PH100000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,0.701328,0.019952
+22,Polygon,Capiz,PH061900000,<Null>,<Null>,<Null>,Region VI ,PH060000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.897668,0.21957
+23,Polygon,Catanduanes,PH052000000,<Null>,<Null>,<Null>,Region V ,PH050000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.387798,0.122082
+24,Polygon,Cavite,PH042100000,<Null>,<Null>,<Null>,Region IV-A ,PH040000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.702045,0.104289
+25,Polygon,Cebu,PH072200000,<Null>,<Null>,<Null>,Region VII ,PH070000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,13.022488,0.402044
+26,Polygon,City of Isabela,PH099700000,<Null>,<Null>,<Null>,Region IX ,PH090000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,1.231033,0.01798
+27,Polygon,Compostela Valley,PH118200000,<Null>,<Null>,<Null>,Region XI ,PH110000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.059716,0.35655
+28,Polygon,Cotabato,PH124700000,<Null>,<Null>,<Null>,Region XII ,PH120000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.119876,0.479736
+29,Polygon,Cotabato City,PH129800000,<Null>,<Null>,<Null>,Region XII ,PH120000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,0.6492,0.00705
+30,Polygon,Davao del Norte,PH112300000,<Null>,<Null>,<Null>,Region XI ,PH110000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.877599,0.265921
+31,Polygon,Davao del Sur,PH112400000,<Null>,<Null>,<Null>,Region XI ,PH110000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.854203,0.34884
+32,Polygon,Davao Occidental,PH118600000,<Null>,<Null>,<Null>,Region XI ,PH110000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.375574,0.160157
+33,Polygon,Davao Oriental,PH112500000,<Null>,<Null>,<Null>,Region XI ,PH110000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,7.213797,0.408503
+34,Polygon,Dinagat Islands,PH168500000,<Null>,<Null>,<Null>,Region XIII ,PH160000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.248743,0.066418
+35,Polygon,Eastern Samar,PH082600000,<Null>,<Null>,<Null>,Region VIII ,PH080000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,11.095883,0.352328
+36,Polygon,Guimaras,PH067900000,<Null>,<Null>,<Null>,Region VI ,PH060000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.376801,0.04925
+37,Polygon,Ifugao,PH142700000,<Null>,<Null>,<Null>,Cordillera Administrative Region ,PH140000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.225237,0.212538
+38,Polygon,Ilocos Norte,PH012800000,<Null>,<Null>,<Null>,Region I ,PH010000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.850139,0.279709
+39,Polygon,Ilocos Sur,PH012900000,<Null>,<Null>,<Null>,Region I ,PH010000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.152632,0.209467
+40,Polygon,Iloilo,PH063000000,<Null>,<Null>,<Null>,Region VI ,PH060000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,8.803323,0.390018
+41,Polygon,Isabela,PH023100000,<Null>,<Null>,<Null>,Region II ,PH020000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.588934,0.890507
+42,Polygon,Kalinga,PH143200000,<Null>,<Null>,<Null>,Cordillera Administrative Region ,PH140000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.511892,0.240271
+43,Polygon,La Union,PH013300000,<Null>,<Null>,<Null>,Region I ,PH010000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.403317,0.119607
+44,Polygon,Laguna,PH043400000,<Null>,<Null>,<Null>,Region IV-A ,PH040000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.82394,0.150938
+45,Polygon,Lanao del Norte,PH103500000,<Null>,<Null>,<Null>,Region X ,PH100000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.153877,0.216439
+46,Polygon,Lanao del Sur,PH153600000,<Null>,<Null>,<Null>,Autonomous Region in Muslim Mindanao ,PH150000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.215881,0.336481
+47,Polygon,Leyte,PH083700000,<Null>,<Null>,<Null>,Region VIII ,PH080000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,8.730117,0.461201
+48,Polygon,Maguindanao,PH153800000,<Null>,<Null>,<Null>,Autonomous Region in Muslim Mindanao ,PH150000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,7.31176,0.403084
+49,Polygon,Marinduque,PH174000000,<Null>,<Null>,<Null>,Region IV-B ,PH170000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.860797,0.076991
+50,Polygon,Masbate,PH054100000,<Null>,<Null>,<Null>,Region V ,PH050000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,12.607523,0.3315
+51,Polygon,Misamis Occidental,PH104200000,<Null>,<Null>,<Null>,Region X ,PH100000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.226582,0.153582
+52,Polygon,Misamis Oriental,PH104300000,<Null>,<Null>,<Null>,Region X ,PH100000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.513963,0.277535
+53,Polygon,Mountain Province,PH144400000,<Null>,<Null>,<Null>,Cordillera Administrative Region ,PH140000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.408026,0.179353
+54,Polygon,"NCR, City of Manila, First District",PH133900000,<Null>,<Null>,<Null>,National Capital Region ,PH130000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,0.613781,0.00352
+55,Polygon,"NCR, Fourth District",PH137600000,<Null>,<Null>,<Null>,National Capital Region ,PH130000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,0.950457,0.016502
+56,Polygon,"NCR, Second District",PH137400000,<Null>,<Null>,<Null>,National Capital Region ,PH130000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,0.948285,0.019613
+57,Polygon,"NCR, Third District",PH137500000,<Null>,<Null>,<Null>,National Capital Region ,PH130000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,0.935944,0.010581
+58,Polygon,Negros Occidental,PH184500000,<Null>,<Null>,<Null>,Negros Island Region ,PH180000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,8.952083,0.632166
+59,Polygon,Negros Oriental,PH184600000,<Null>,<Null>,<Null>,Negros Island Region ,PH180000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.319494,0.422861
+60,Polygon,Northern Samar,PH084800000,<Null>,<Null>,<Null>,Region VIII ,PH080000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,10.389946,0.286023
+61,Polygon,Nueva Ecija,PH034900000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.827859,0.463907
+62,Polygon,Nueva Vizcaya,PH025000000,<Null>,<Null>,<Null>,Region II ,PH020000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.712481,0.348874
+63,Polygon,Occidental Mindoro,PH175100000,<Null>,<Null>,<Null>,Region IV-B ,PH170000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,7.763284,0.497575
+64,Polygon,Oriental Mindoro,PH175200000,<Null>,<Null>,<Null>,Region IV-B ,PH170000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.524029,0.349788
+65,Polygon,Palawan,PH175300000,<Null>,<Null>,<Null>,Region IV-B ,PH170000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,60.162575,1.187132
+66,Polygon,Pampanga,PH035400000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.673655,0.17771
+67,Polygon,Pangasinan,PH015500000,<Null>,<Null>,<Null>,Region I ,PH010000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,7.246192,0.435199
+68,Polygon,Quezon,PH045600000,<Null>,<Null>,<Null>,Region IV-A ,PH040000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,19.816972,0.70348
+69,Polygon,Quirino,PH025700000,<Null>,<Null>,<Null>,Region II ,PH020000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.976781,0.234041
+70,Polygon,Rizal,PH045800000,<Null>,<Null>,<Null>,Region IV-A ,PH040000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.98064,0.100686
+71,Polygon,Romblon,PH175900000,<Null>,<Null>,<Null>,Region IV-B ,PH170000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.702443,0.108889
+72,Polygon,Samar,PH086000000,<Null>,<Null>,<Null>,Region VIII ,PH080000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,13.305485,0.44654
+73,Polygon,Sarangani,PH128000000,<Null>,<Null>,<Null>,Region XII ,PH120000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.172659,0.302231
+74,Polygon,Siquijor,PH076100000,<Null>,<Null>,<Null>,Region VII ,PH070000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,1.057424,0.026291
+75,Polygon,Sorsogon,PH056200000,<Null>,<Null>,<Null>,Region V ,PH050000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,6.46107,0.165417
+76,Polygon,South Cotabato,PH126300000,<Null>,<Null>,<Null>,Region XII ,PH120000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,3.61534,0.336635
+77,Polygon,Southern Leyte,PH086400000,<Null>,<Null>,<Null>,Region VIII ,PH080000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,4.214644,0.136631
+78,Polygon,Sultan Kudarat,PH126500000,<Null>,<Null>,<Null>,Region XII ,PH120000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.027333,0.345416
+79,Polygon,Sulu,PH156600000,<Null>,<Null>,<Null>,Autonomous Region in Muslim Mindanao ,PH150000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,20.260352,0.123792
+80,Polygon,Surigao del Norte,PH166700000,<Null>,<Null>,<Null>,Region XIII ,PH160000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,12.873523,0.162574
+81,Polygon,Surigao del Sur,PH166800000,<Null>,<Null>,<Null>,Region XIII ,PH160000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,8.88043,0.3861
+82,Polygon,Tarlac,PH036900000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,2.521633,0.250267
+83,Polygon,Tawi-Tawi,PH157000000,<Null>,<Null>,<Null>,Autonomous Region in Muslim Mindanao ,PH150000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,15.971438,0.094186
+84,Polygon,Zambales,PH037100000,<Null>,<Null>,<Null>,Region III ,PH030000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,5.32977,0.313705
+85,Polygon,Zamboanga del Norte,PH097200000,<Null>,<Null>,<Null>,Region IX ,PH090000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,8.170921,0.515482
+86,Polygon,Zamboanga del Sur,PH097300000,<Null>,<Null>,<Null>,Region IX ,PH090000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,11.811657,0.439806
+87,Polygon,Zamboanga Sibugay,PH098300000,<Null>,<Null>,<Null>,Region IX ,PH090000000,Philippines (the),PH,15/06/2016,30/01/2018,<Null>,8.997252,0.223408
