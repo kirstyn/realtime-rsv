@@ -1,20 +1,61 @@
-################################################################################
-#                           Map Philippines by region                         #
-################################################################################
-rm(list=ls())
+### Trees
 
-# If ggplot2 hangs - reinstall!:
-# deps <- tools::package_dependencies("ggplot2", recursive = TRUE)$ggplot2
-# for (dep in deps)
-#   try(install.packages(dep))
-
-# Load libraries
+# source("https://bioconductor.org/biocLite.R")
+# biocLite("ggtree")
+# install_github("YuLab-SMU/ggtree")
+library(ape)
+library(stringr)
+library(data.table)
+library(tidytree)
+library(phylobase)
+library(ggrepel)
+library(ggtree)
+library(treeio)
+library(devtools)
 library(dplyr)
 library(rgdal)
 library(ggplot2)
 library(broom)
 library(rgeos)
 library(prettymapr)
+library(viridis)
+library(RColorBrewer)
+
+## simple tree visualisation
+# tree=read.tree("~/Documents/SEQUENCE_DATA/MinION/rabvglue_alignmentsPhylogenies/AL_WG_ASIAN_SEA4_og_rerooted.tree")
+tree = read.tree("AL_WG_ASIAN_SEA4_og_rerooted.tree")
+
+# get tip info
+# meta=tree$tip.label
+# meta2=as.data.table(tstrsplit(meta, "/"))
+# first column must be taxa labels (or node) to allow mapping back to tree
+# meta2=cbind(tree$tip.label,meta2)
+# names(meta2)=c("taxa","aln", "clade", "member","source","sample_id")
+
+#extra metadata
+# meta=read.csv("~/Documents/SEQUENCE_DATA/MinION/rabvglue_alignmentsPhylogenies/AL_WG_ASIAN_SEA4_metadata.csv")
+meta = read.csv("AL_WG_ASIAN_SEA4_metadata.csv")
+meta$label2 = paste(meta$sample_id.1, meta$year, meta$region, sep="/" )
+# meta$region
+
+region_levels = sort(unique(meta$region))
+colour_levels = c(viridis(6), "black", "grey")  #"darkolivegreen3", "chartreuse3", , "cornflowerblue", "transparent")
+meta$col = colour_levels[match(meta$region, region_levels)]
+
+p <- ggtree(tree) %<+% meta
+
+p + geom_nodepoint(size=2, shape=15, alpha=.3, 
+                   aes(label=node, subset = !is.na(as.numeric(label)) & as.numeric(label) > 80)) +
+  geom_tippoint(size=2, aes(shape = source, color = region)) + 
+  scale_color_brewer("region", palette="Spectral")
+  theme(legend.position = "bottom") +
+  geom_treescale(linesize=0.3) + 
+  geom_tiplab(aes(label=label2), size=1.4, linesize=0, align=F, offset=0.001)
+
+# pdf("~/Desktop/test.pdf", height=8, width=11)
+pdf("test.pdf", height=8, width=11)
+dev.off()
+
 
 # Load data
 phl_province <- readOGR("PHL", "PHL_province")
@@ -71,70 +112,6 @@ plot(phl_province, col=reg_colours[match(phl_province@data$reg, reg_cases)],
 legend("topright", legend=reg_cases[1:6], fill=reg_colours[1:6], bty = "n", title="Region", cex=1.3)
 addnortharrow(pos="bottomleft", scale=0.8)
 dev.off()
-
-
-
-
-
-
-reg_cases = c("1", "3", "4A", "4B", "5", "None")
-reg_colours = c("firebrick3", "darkolivegreen3", "chartreuse3", "blueviolet", "cornflowerblue", "transparent")
-color = reg_colours[match(phl_province$reg, reg_cases)]
-
-pdf("PhilSeqMap.pdf", height=8, width=6)
-plot(phl_province, border="darkgrey", col = "grey", lwd=.5, xlim = c(120,125), ylim = c(6,19))
-plot(phl_province, col=reg_colours[match(phl_province@data$reg, reg_cases)], 
-     border="darkgrey", lwd=.5, add=TRUE)
-legend("topright", legend=reg_cases[1:5], fill=reg_colours[1:5], bty = "n", title="Region", cex=1.3)
-addnortharrow(pos="bottomleft", scale=0.8)
-dev.off()
-
-# Alternative in gglpot
-gg <- ggplot(data = phl_province) # Make gg object
-values <- data.frame("group" = factor(1:length(phl_province$reg)), "color" = color) # Make auxilliary data.frame
-gg$data <- merge(gg$data, values, by = c("group")) # Add color data to gg object by merging
-# Plot gg object
-
-gg + 
-  geom_polygon(data=phl_province, aes(x=long, y=lat), fill="grey", col="white") +
-  geom_polygon(aes(x = long, y = lat, group = group),  fill = gg$data$color, colour = 1) + 
-  theme_void() +
-  theme(legend.title = element_blank()) +
-  coord_equal()
-ggsave("test2.pdf", height=8, width=8)
-
-
-deps <- tools::package_dependencies("ggplot2", recursive = TRUE)$ggplot2
-for (dep in deps)
-  try(install.packages(dep))
-
-
-ggplot() +
-  geom_polygon(data=phl_province, aes(x=long, y=lat), fill="grey", col="white") +
-#  geom_polygon(data=phl_province, aes(x=long, y=lat, group=reg, fill = reg_colours), col="white", size=0.1) +
-  theme_void() +
-  theme(legend.title = element_blank()) +
-  coord_equal()
-ggsave("test2.pdf", height=8, width=8)
-
-
-# Subset data
-prov_seq_data <- phl_province[which(phl_province$reg!="None"),]
-
-# Set factor levels
-prov_seq <- sort(unique(prov_seq_data$reg))
-prov_seq <- drop.levels(prov_seq, reorder=TRUE)
-prov_seq_data$regions <- factor(prov_seq_data$reg, levels=prov_seq)
-
-ggplot() +
-  geom_polygon(data=phl_province, aes(x=long, y=lat, group=group, fill=factor(group)), col="white") +
-  # geom_polygon(data=prov_seq_data, aes(x=long, y=lat, group=group, fill=regions), col="white", size=0.1) +
-  #scale_fill_manual(values=viridis(n=length(prov_seq)), na.value="grey", breaks=prov_seq, labels=prov_seq) +
-  theme_void() +
-  theme(legend.title = element_blank()) +
-  coord_equal()
-ggsave("test2.pdf", height=8, width=8)
-
 
 
 

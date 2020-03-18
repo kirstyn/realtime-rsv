@@ -1,0 +1,52 @@
+taxa,aln,clade,member,source,sample_id,host,region,sample_id,year
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_304_NB13,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_304_NB13,Domestic dog,5,304,2018
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_311_NB14,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_311_NB14,Domestic dog,5,311,2018
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/GU358653,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,GU358653,,outgroup,GU358653,na
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/GU647092,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,GU647092,,outgroup,GU647092,na
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/KX148259,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,KX148259,Domestic dog,unknown,KX148259,1994
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/KX148260,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,KX148260,Domestic dog,unknown,KX148260,2004
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/KX148261,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,KX148261,Domestic dog,unknown,KX148261,1994
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/KX148262,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,KX148262,Domestic dog,unknown,KX148262,1994
+alignment/AL_WG_ASIAN_SEA4/member/ncbi-curated/KX148263,alignment,AL_WG_ASIAN_SEA4,member,ncbi-curated,KX148263,Domestic dog,unknown,KX148263,1994
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_RADDL1-16-154_NB04,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_RADDL1-16-154_NB04,Domestic dog,1,RADDL1-16-154,2016
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_RADDL3-1038_NB03,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_RADDL3-1038_NB03,Domestic dog,3,RADDL3-1038,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_RADDL3-1045_NB02,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_RADDL3-1045_NB02,Domestic dog,3,RADDL3-1045,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_RADDL3-15-172_NB01,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_RADDL3-15-172_NB01,Domestic dog,3,RADDL3-15-172,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_RADDL3-845_NB06,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_RADDL3-845_NB06,Domestic dog,3,RADDL3-845,2016
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_RADDL5-005_NB08,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_RADDL5-005_NB08,Domestic dog,5,RADDL5-005,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_REGION_5_2018-100_BC07,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_REGION_5_2018-100_BC07,Domestic dog,5,REGION_5_2018-100,2018
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_REGION_5_2018-50_BC08,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_REGION_5_2018-50_BC08,Domestic dog,5,REGION_5_2018-50,2018
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_REGION_5_2019-1_BC06,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_REGION_5_2019-1_BC06,Domestic dog,5,REGION_5_2019-1,2019
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_REGION_5_2019-13_BC05,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_REGION_5_2019-13_BC05,Domestic dog,5,REGION_5_2019-13,2019
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-12-001_NB05,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-12-001_NB05,Domestic dog,4A,Z-12-001,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-12-088_NB11,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-12-088_NB11,Domestic dog,NCR,Z-12-088,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-12-118_NB09,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-12-118_NB09,Domestic dog,4A,Z-12-118,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-12-134,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-12-134,Domestic dog,4A,Z-12-134,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-12-149_NB12,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-12-149_NB12,Domestic dog,4B,Z-12-149,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-12-212,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-12-212,Domestic dog,4A,Z-12-212,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-12-212_NB10,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-12-212_NB10,Domestic dog,4A,Z-12-212,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-13-002_NB14,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-13-002_NB14,Domestic dog,NCR,Z-13-002,2013
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-13-009_NB13,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-13-009_NB13,Domestic dog,4A,Z-13-009,2013
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-13-032_NB16,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-13-032_NB16,Domestic dog,NCR,Z-13-032,2013
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-13-071_NB12,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-13-071_NB12,Domestic dog,NCR,Z-13-071,2013
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-13-094_NB15,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-13-094_NB15,Domestic dog,4A,Z-13-094,2013
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-13-096_NB08,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-13-096_NB08,Domestic cat,NCR,Z-13-096,2013
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-14-033_NB18,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-14-033_NB18,Domestic dog,4A,Z-14-033,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-14-136_NB01,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-14-136_NB01,Domestic dog,4A,Z-14-136,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-14-138_NB02,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-14-138_NB02,Domestic dog,NCR,Z-14-138,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-14-146_NB03,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-14-146_NB03,Domestic dog,4A,Z-14-146,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-14-149_NB20,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-14-149_NB20,Domestic dog,4A,Z-14-149,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-15-001_NB07,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-15-001_NB07,Domestic dog,4A,Z-15-001,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-15-019_NB05,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-15-019_NB05,Domestic dog,NCR,Z-15-019,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-15-116_NB04,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-15-116_NB04,Domestic dog,4A,Z-15-116,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-15-130_NB09,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-15-130_NB09,Domestic dog,4A,Z-15-130,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-15-148_NB21,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-15-148_NB21,Domestic dog,NCR,Z-15-148,2015
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-16-082_NB19,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-16-082_NB19,Domestic dog,4A,Z-16-082,2016
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-16-159_NB16,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-16-159_NB16,Domestic dog,4A,Z-16-159,2016
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-16-186_NB17,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-16-186_NB17,Domestic dog,4A,Z-16-186,2016
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive1_phl_Z-16-210_NB11,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive1_phl_Z-16-210_NB11,Domestic dog,NCR,Z-16-210,2017
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_archive2_phl_Z-16-211_NB15,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_archive2_phl_Z-16-211_NB15,Domestic dog,4A,Z-16-211,2019
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_Z12-012_BC03,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_Z12-012_BC03,Domestic dog,4A,Z12-012,2012
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_Z14-142_BC02,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_Z14-142_BC02,Domestic dog,4A,Z14-142,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_Z14-152_BC01,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_Z14-152_BC01,Domestic dog,NCR,Z14-152,2014
+alignment/AL_WG_ASIAN_SEA4/member/speedier-philippines/ritm_workshop_phl_Z15-185_BC04,alignment,AL_WG_ASIAN_SEA4,member,this paper,ritm_workshop_phl_Z15-185_BC04,Domestic dog,NCR,Z15-185,2015
