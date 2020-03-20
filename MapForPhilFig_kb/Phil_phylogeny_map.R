@@ -55,13 +55,8 @@ gCentroid(phl_province)
 bbox(phl_province)
 
 # Colour scheme
-reg_cases = c("1", "3", "4A", "4B", "5", "NCR","None")
-gg_color_hue <- function(n) {
-  hues = seq(15, 375, length = n + 1)
-  hcl(h = hues, l = 65, c = 100)[1:n]
-}
-n = 6
-reg_colours = c(gg_color_hue(n),"transparent")
+pal=wes_palette(7, name = "FantasticFox1", type = "continuous")
+reg_colours = c(pal[c(1:4,6:7)], "transparent")
 
 #reg_colours = c("firebrick3", "darkolivegreen3", "chartreuse3", "blueviolet", "cornflowerblue", "transparent")
 

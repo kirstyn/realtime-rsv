@@ -1,7 +1,7 @@
 ### Trees
 
-# source("https://bioconductor.org/biocLite.R")
-# biocLite("ggtree")
+#source("https://bioconductor.org/biocLite.R")
+#biocLite("ggtree")
 # install_github("YuLab-SMU/ggtree")
 library(ape)
 library(stringr)
@@ -20,99 +20,49 @@ library(rgeos)
 library(prettymapr)
 library(viridis)
 library(RColorBrewer)
+library(wesanderson)
 
 ## simple tree visualisation
-# tree=read.tree("~/Documents/SEQUENCE_DATA/MinION/rabvglue_alignmentsPhylogenies/AL_WG_ASIAN_SEA4_og_rerooted.tree")
 tree = read.tree("AL_WG_ASIAN_SEA4_og_rerooted.tree")
 
-# get tip info
+# extract tip info
 # meta=tree$tip.label
 # meta2=as.data.table(tstrsplit(meta, "/"))
 # first column must be taxa labels (or node) to allow mapping back to tree
 # meta2=cbind(tree$tip.label,meta2)
 # names(meta2)=c("taxa","aln", "clade", "member","source","sample_id")
 
-#extra metadata
-# meta=read.csv("~/Documents/SEQUENCE_DATA/MinION/rabvglue_alignmentsPhylogenies/AL_WG_ASIAN_SEA4_metadata.csv")
+#extracted tip info combined with additional data:
 meta = read.csv("AL_WG_ASIAN_SEA4_metadata.csv")
-meta$label2 = paste(meta$sample_id.1, meta$year, meta$region, sep="/" )
+meta$label2 = paste(meta$sample_id.1, meta$year, sep="/" )
 # meta$region
-
 region_levels = sort(unique(meta$region))
-colour_levels = c(viridis(6), "black", "grey")  #"darkolivegreen3", "chartreuse3", , "cornflowerblue", "transparent")
-meta$col = colour_levels[match(meta$region, region_levels)]
+#removing outgroup labels (don't fit in plot)
+meta$label2[3]=""
+meta$label2[4]=""
 
+#colours
+##ggplot colours:
+# gg_color_hue <- function(n) {
+#   hues = seq(15, 375, length = n + 1)
+#   hcl(h = hues, l = 65, c = 100)[1:n]
+# }
+# n = 6
+# reg_colours = c(gg_color_hue(n),"transparent")
+
+##wes colours:
+##continuous if more than 5
+pal=wes_palette(7, name = "FantasticFox1", type = "continuous")
+reg_colours = c(pal[c(1:4,6:7)], "black", "burlywood4")
+
+##attach metadata to tree
 p <- ggtree(tree) %<+% meta
 
-p + geom_nodepoint(size=2, shape=15, alpha=.3, 
-                   aes(label=node, subset = !is.na(as.numeric(label)) & as.numeric(label) > 80)) +
-  geom_tippoint(size=2, aes(shape = source, color = region)) + 
-  scale_color_brewer("region", palette="Spectral")
-  theme(legend.position = "bottom") +
-  geom_treescale(linesize=0.3) + 
-  geom_tiplab(aes(label=label2), size=1.4, linesize=0, align=F, offset=0.001)
+##plot tree
+#pdf("phl_phylogeny1.pdf", height=8, width=11)
+p+geom_nodepoint(size=2, shape=15,alpha=.3,aes(label=node,subset = !is.na(as.numeric(label)) & as.numeric(label) > 80))+geom_tippoint(size=3,aes(shape = source, color = region))  + theme(legend.text=element_text(size=14), legend.title=element_text(size=14),legend.position = "bottom")+scale_color_manual(values=reg_colours)+geom_treescale(linesize=0.5, offset=-2)
+#add for tip labels:
+#+geom_tiplab(aes(label=label2), size=3, linesize=0, align=F, offset=0.001)
 
-# pdf("~/Desktop/test.pdf", height=8, width=11)
-pdf("test.pdf", height=8, width=11)
-dev.off()
-
-
-# Load data
-phl_province <- readOGR("PHL", "PHL_province")
-phl_province_data <- fortify(phl_province) # Process shapefiles into dataframes - needed for using ggplot2 on spatial data!
-
-# 83 provinces are split into 17 regions - but the regions need adding!
-admin <- read.csv("PHL/phl_adminboundaries.csv"); head(admin)
-
-test1 = match(admin$admin2Name_en, phl_province@data$NAME_1)
-admin$admin2Name_en[which(is.na(test1))]
-# "Davao" = "Region XI" # Davao Occidental
-# "Isabela" = "Region II" # City of Isabela, Cagayan Valley
-# "Cotabato" = "Region XII" # Soccsksargen (North Cotabato) # Cotabato; Cotabato City
-# "NCR" = "National Capital Region" # NCR, City of Manila, First District; NCR, Fourth District; NCR, Second District; NCR, Third District
-# "Shariff Kabunsuan" = "Autonomous Region in Muslim Mindanao "
-
-test2 = match(phl_province@data$NAME_1, admin$admin2Name_en)
-phl_province@data$NAME_1[which(is.na(test2))]
-phl_province@data$NAME_1 <- as.character(phl_province@data$NAME_1 )
-phl_province@data$NAME_1[grep("Metropolitan Manila", phl_province@data$NAME_1)] <- "NCR, City of Manila, First District"
-phl_province@data$NAME_1[grep("North Cotabato", phl_province@data$NAME_1)] <- "Cotabato City"
-phl_province@data$NAME_1[grep("Shariff Kabunsuan", phl_province@data$NAME_1)] <- "Maguindanao"
-
-phl_province@data$Province <- admin$admin2Name_en[match(phl_province@data$NAME_1, admin$admin2Name_en)]
-phl_province@data$Province <- as.character(phl_province@data$Province)
-phl_province@data$Province[grep("NCR, City of Manila", phl_province@data$NAME_1)] <- "NCR, City of Manila"
-phl_province@data$Province[grep("Cotabato", phl_province@data$NAME_1)] <- "Region XII"
-phl_province@data$Province[grep("Maguindanao", phl_province@data$NAME_1)] <- "Autonomous Region in Muslim Mindanao "
-
-phl_province@data$REGION <- admin$admin1Name_en[match(phl_province@data$NAME_1, admin$admin2Name_en)]
-phl_province@data$reg <- "None"
-phl_province@data$reg[which(phl_province@data$REGION == "Region I ")] <- "1"
-phl_province@data$reg[which(phl_province@data$REGION == "Region III ")] <- "3"
-phl_province@data$reg[which(phl_province@data$REGION == "Region IV-A ")] <- "4A"
-phl_province@data$reg[which(phl_province@data$REGION == "Region IV-B ")] <- "4B"
-phl_province@data$reg[which(phl_province@data$REGION == "Region V ")] <- "5"
-phl_province@data$reg[which(phl_province@data$REGION == "National Capital Region ")] <- "NCR"
-regions <- sort(unique(phl_province@data$reg))
-phl_province$reg = factor(phl_province@data$reg, levels=regions)
-
-#-------------------------------------------------------------------------------
-# Create Philippines map
-gCentroid(phl_province)
-bbox(phl_province)
-
-# Colour scheme
-reg_cases = c("1", "3", "4A", "4B", "5", "NCR", "None")
-reg_colours = c(brewer.pal(6,"Spectral"), "transparent")
-
-pdf("PhilSeqMap.pdf", height=8, width=6)
-plot(phl_province, border="darkgrey", col = "grey", lwd=.5, xlim = c(120,125), ylim = c(6,19))
-plot(phl_province, col=reg_colours[match(phl_province@data$reg, reg_cases)], 
-     border="darkgrey", lwd=.5, add=TRUE)
-legend("topright", legend=reg_cases[1:6], fill=reg_colours[1:6], bty = "n", title="Region", cex=1.3)
-addnortharrow(pos="bottomleft", scale=0.8)
-dev.off()
-
-
-
+#dev.off()
 

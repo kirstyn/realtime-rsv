@@ -15,7 +15,7 @@ library(ggplot2)
 library(broom)
 library(rgeos)
 library(prettymapr)
-
+library(RColorBrewer)
 # Load data
 phl_province <- readOGR("PHL", "PHL_province")
 phl_province_data <- fortify(phl_province) # Process shapefiles into dataframes - needed for using ggplot2 on spatial data!
@@ -62,32 +62,18 @@ bbox(phl_province)
 
 # Colour scheme
 reg_cases = c("1", "3", "4A", "4B", "5", "NCR", "None")
-reg_colours = c(brewer.pal(6,"Spectral"), "transparent")
+#reg_colours = c(brewer.pal(6,"Spectral"), "transparent")
+#reg_colours  <- c(wes_palette(6, name = "FantasticFox1", type = "continuous"), "transparent")
+pal=wes_palette(7, name = "FantasticFox1", type = "continuous")
+reg_colours = c(pal[c(1:4,6:7)], "transparent")
 
-pdf("PhilSeqMap.pdf", height=8, width=6)
+pdf("PhilSeqMap3.pdf", height=8, width=6)
 plot(phl_province, border="darkgrey", col = "grey", lwd=.5, xlim = c(120,125), ylim = c(6,19))
-plot(phl_province, col=reg_colours[match(phl_province@data$reg, reg_cases)], 
-     border="darkgrey", lwd=.5, add=TRUE)
+plot(phl_province, col=reg_colours[match(phl_province@data$reg, reg_cases)],  border="darkgrey", lwd=.5, add=TRUE)
 legend("topright", legend=reg_cases[1:6], fill=reg_colours[1:6], bty = "n", title="Region", cex=1.3)
 addnortharrow(pos="bottomleft", scale=0.8)
 dev.off()
 
-
-
-
-
-
-reg_cases = c("1", "3", "4A", "4B", "5", "None")
-reg_colours = c("firebrick3", "darkolivegreen3", "chartreuse3", "blueviolet", "cornflowerblue", "transparent")
-color = reg_colours[match(phl_province$reg, reg_cases)]
-
-pdf("PhilSeqMap.pdf", height=8, width=6)
-plot(phl_province, border="darkgrey", col = "grey", lwd=.5, xlim = c(120,125), ylim = c(6,19))
-plot(phl_province, col=reg_colours[match(phl_province@data$reg, reg_cases)], 
-     border="darkgrey", lwd=.5, add=TRUE)
-legend("topright", legend=reg_cases[1:5], fill=reg_colours[1:5], bty = "n", title="Region", cex=1.3)
-addnortharrow(pos="bottomleft", scale=0.8)
-dev.off()
 
 # Alternative in gglpot
 gg <- ggplot(data = phl_province) # Make gg object
