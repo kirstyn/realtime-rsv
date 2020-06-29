@@ -13,12 +13,12 @@ references_file: ../../references.fasta
 
 ##### Read length filtering range #####
 
-min_read_length: 400
+min_read_length: 350
 max_read_length: 3000
 
 ##### Read thresholds #####
 
-min_reads: 50
+min_reads: 20
 min_pcent: 0.005
 
 ##### Analysis Stem #####

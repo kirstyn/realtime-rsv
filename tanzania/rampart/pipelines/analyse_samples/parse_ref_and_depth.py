@@ -32,18 +32,12 @@ def make_ref_dict(references):
 
 def count_and_return_analysis_dict(report,csv_out,sample):
     counts = OrderedDict()
-    counts["RABV_PER"]=0
-    counts["RABV_BRA"]=0
-    counts["RABV_PHL"]=0
-    counts["RABV_TZA"]=0
+    counts["AF1B"]=0
     counts["*"]=0
     counts["?"]=0
 
     detail_dict= {
-        "RABV_PER": Counter(),
-        "RABV_BRA": Counter(),
-        "RABV_PHL": Counter(),
-        "RABV_TZA": Counter(),
+        "AF1B": Counter(),
         "*": Counter(),
         "?": Counter()
     }
