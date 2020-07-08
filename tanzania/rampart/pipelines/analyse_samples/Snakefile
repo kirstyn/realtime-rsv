@@ -80,21 +80,34 @@ rule binlorry:
         min_read_length = config["min_read_length"],
         max_read_length = config["max_read_length"],
         barcode_str = barcode_string,
+	barcode01= "barcode01",  
         output_prefix= config["output_path"] + "/temp/binned"
     output:
         temp(expand(config["output_path"] + "/temp/binned_{barcode}.fastq",barcode = barcodes)),
         temp(expand(config["output_path"] + "/temp/binned_{barcode}.csv",barcode = barcodes))
-    shell:
-        "binlorry -i {params.path_to_reads:q} "
-        "-t {params.report_dir:q} "
-        "-o {params.output_prefix:q} "
-        "-n {params.min_read_length} "
-        "-x {params.max_read_length} "
-        "-v 0 "
-        "--bin-by barcode "
-        "--filter-by barcode {params.barcode_str} "
-        "--force-output "
-        "--out-report"
+    run:
+        for barcode in barcodes:
+            shell("binlorry -i {params.path_to_reads:q}/{barcode} "
+            "-t {params.report_dir:q}/{barcode} "
+            "-o {params.output_prefix:q} "
+            "-n {params.min_read_length} "
+            "-x {params.max_read_length} "
+            "-v 0 "
+            "--bin-by barcode "
+            "--filter-by barcode {barcode} "
+            "--force-output "
+            "--out-report")
+#    shell:
+#        "binlorry -i {params.path_to_reads:q} "
+#        "-t {params.report_dir:q} "
+#        "-o {params.output_prefix:q} "
+#        "-n {params.min_read_length} "
+#        "-x {params.max_read_length} "
+#        "-v 0 "
+#        "--bin-by barcode "
+#        "--filter-by barcode {params.barcode_str} "
+#        "--force-output "
+#        "--out-report"
 
 rule rename_to_samples:
     input:

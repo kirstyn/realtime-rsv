@@ -14,7 +14,7 @@ dependencies:
   - python=3.6
   - snakemake-minimal
   - racon=1.4.7
-  - artic-network::rampart=1.1
+  - artic-network::rampart=1.2
   - pip:
     - msgpack==0.6.2
     - binlorry==1.3.1
