@@ -23,7 +23,8 @@ library(RColorBrewer)
 library(wesanderson)
 
 ## simple tree visualisation
-tree = read.tree("AL_WG_ASIAN_SEA4_og_rerooted.tree")
+rawtree = read.tree("AL_WG_ASIAN_SEA4_og_rerooted.tree")
+tree=drop.tip(rawtree,grep("GU358653|GU647092",rawtree$tip.label))
 
 # extract tip info
 # meta=tree$tip.label
@@ -34,13 +35,15 @@ tree = read.tree("AL_WG_ASIAN_SEA4_og_rerooted.tree")
 
 #extracted tip info combined with additional data:
 meta = read.csv("AL_WG_ASIAN_SEA4_metadata.csv")
-meta$label2 = paste(meta$sample_id.1, meta$year, sep="/" )
+meta$label2 = paste("Reg", meta$region,"|",meta$year,"|",meta$sample_id.1, sep="" )
 # meta$region
 region_levels = sort(unique(meta$region))
 #removing outgroup labels (don't fit in plot)
-meta$label2[3]=""
-meta$label2[4]=""
-
+#meta$label2[3]=""
+#meta$label2[4]=""
+meta$label2=gsub("Regunknown","unknown", meta$label2)
+meta$label2=gsub("Regoutgroup","outgroup", meta$label2)
+meta$label2[meta$label2=="outgroup|na|GU647092"]=""
 #colours
 ##ggplot colours:
 # gg_color_hue <- function(n) {
@@ -53,16 +56,22 @@ meta$label2[4]=""
 ##wes colours:
 ##continuous if more than 5
 pal=wes_palette(7, name = "FantasticFox1", type = "continuous")
-reg_colours = c(pal[c(1:4,6:7)], "black", "burlywood4")
+reg_colours = c(pal[c(1:4,6:7)],"black","burlywood4")
 
 ##attach metadata to tree
 p <- ggtree(tree) %<+% meta
 
 ##plot tree
-#pdf("phl_phylogeny1.pdf", height=8, width=11)
-p+geom_nodepoint(size=2, shape=15,alpha=.3,aes(label=node,subset = !is.na(as.numeric(label)) & as.numeric(label) > 80))+geom_tippoint(size=3,aes(shape = source, color = region))  + theme(legend.text=element_text(size=14), legend.title=element_text(size=14),legend.position = "bottom")+scale_color_manual(values=reg_colours)+geom_treescale(linesize=0.5, offset=-2)
+pdf("phl_phylogeny1_lab.pdf", height=11, width=8)
+p+geom_nodepoint(size=2, shape=15,alpha=.3,aes(label=node,subset = !is.na(as.numeric(label)) & as.numeric(label) > 80))+geom_tippoint(size=4,aes(shape = source, color = region, fill=region))  + theme(legend.text=element_text(size=14), legend.title=element_text(size=14),legend.position = "bottom")+geom_treescale(linesize=0.5, offset=-2)+scale_fill_manual(values=reg_colours)+scale_shape_manual(values=c(24,21))+scale_colour_manual(values=rep("black",8))+theme(legend.position = "bottom",legend.text=element_text(size=14), legend.title=element_text(size=14))+
+  guides(fill = guide_legend(override.aes = list(colour = reg_colours))) +theme(
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "transparent",colour = NA),
+    plot.background = element_rect(fill = "transparent",colour = NA)
+  )+
 #add for tip labels:
-#+geom_tiplab(aes(label=label2), size=3, linesize=0, align=F, offset=0.001)
+geom_tiplab(aes(label=label2), size=1.5, linesize=0, align=F, offset=0.001)
 
-#dev.off()
+dev.off()
 
