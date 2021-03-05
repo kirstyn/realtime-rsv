@@ -1,0 +1,33 @@
+import os
+from Bio import SeqIO
+
+##### Configuration #####
+
+config["analysis_stem"]=[i for i in config["analysis_stem"].split(',')]
+
+##### Target rules #####
+
+rule all:
+    input:
+        expand(config["output_path"] + "/consensus_sequences/{sample}.fasta",sample=config["sample"])
+        # expand(config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.paf",sample=config["sample"],analysis_stem=config["analysis_stem"])
+
+##### Modules #####
+
+include: "rules/map_polish.smk",
+include: "rules/mask_low_coverage_merge.smk"
+
+
+rule trim_primers:
+    input:
+        reads = config["output_path"]+"/binned_{sample}/{analysis_stem}.fastq"
+    params:
+        path_to_script = workflow.current_basedir
+    output:
+        config["output_path"]+"/binned_{sample}/{analysis_stem}.primer_trimmed.fastq"
+    shell:
+        """
+        python {params.path_to_script}/rules/trim_primers.py \
+        --reads {input.reads} \
+        --output_reads {output}
+        """

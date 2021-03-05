@@ -1,0 +1,24 @@
+##### Where is the data? #####
+
+input_path: path/to/data
+annotated_path: annotations
+output_path: analysis
+
+##### Mapping reference panel #####
+
+references_file: ../../references.fasta
+
+##### Barcodes to process #####
+
+
+##### Read length filtering range #####
+
+min_read_length: 350
+max_read_length: 3000
+
+##### Read thresholds #####
+
+min_reads: 20
+min_pcent: 0.005
+
+##### Analysis Stem #####
