@@ -1,4 +1,4 @@
-import yaml 
+import yaml
 import csv
 from pytools.persistent_dict import PersistentDict
 
@@ -36,7 +36,7 @@ if config.get("samples"):
         handle = config["samples"]
         print(handle)
         sample_csv = yaml.safe_load(handle)
-        
+
         barcodes = sample_csv.split(',')
         barcode_string = ' '.join(barcodes)
         for barcode in barcodes:
@@ -80,7 +80,7 @@ rule binlorry:
         min_read_length = config["min_read_length"],
         max_read_length = config["max_read_length"],
         barcode_str = barcode_string,
-	barcode01= "barcode01",  
+	barcode01= "barcode01",
         output_prefix= config["output_path"] + "/temp/binned"
     output:
         temp(expand(config["output_path"] + "/temp/binned_{barcode}.fastq",barcode = barcodes)),
@@ -109,6 +109,7 @@ rule binlorry:
 #        "--force-output "
 #        "--out-report"
 
+
 rule rename_to_samples:
     input:
         rules.binlorry.output
@@ -131,7 +132,7 @@ rule rename_to_samples:
                 csv_file = params.output_prefix + "_" + barcode + ".csv"
 
                 read_str+=read_file + ' '
-            
+
                 csv_list.append(csv_file)
 
             output_reads = params.output_path + "/binned_" + sample + ".fastq"
@@ -143,7 +144,7 @@ rule rename_to_samples:
                 write_csv_files_with_only_one_header(csv_list, output_csv)
             else:
                 shell("cp " + csv_list[0] + " " + output_csv)
-            
+
 
 rule assess_sample:
     input:

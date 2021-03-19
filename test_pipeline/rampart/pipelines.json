@@ -1,18 +1,15 @@
 {
-	"analysis": 
+	"analysis":
 		{
 			"name": "Analyse to consensus",
             "path": "pipelines/analyse_samples",
             "processing": true,
             "config_file": "config.yaml",
-
             "config": " min_reads=20 min_pcent=0.01",
-
             "requires": [
                 {
                     "file": "references.fasta",
                     "config_key": "references_file"
-
                 }
             ],
             "run_per_sample": true,
@@ -27,7 +24,4 @@
                 "output_path": true
             }
 		}
-
 }
-
-
