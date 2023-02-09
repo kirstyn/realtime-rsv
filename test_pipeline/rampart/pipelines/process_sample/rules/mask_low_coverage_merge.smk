@@ -1,4 +1,3 @@
-
 rule map_to_cns:
     input:
         cns = config["output_path"] + "/binned_{sample}/{analysis_stem}.consensus.fasta",

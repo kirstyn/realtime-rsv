@@ -1,11 +1,52 @@
 rule files:
     params:
         ref=config["output_path"] + "/binned_{sample}/{analysis_stem}.fasta",
-        reads=config["output_path"]+"/binned_{sample}/{analysis_stem}.primer_trimmed.fastq"
+        reads=config["output_path"]+"/binned_{sample}/{analysis_stem}.fastq"
+
+rule pre_map:
+    input:
+        reads=rules.files.params.reads,
+        ref= rules.files.params.ref
+    output:
+        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/pre_map.bam"
+    shell:
+        "minimap2 -a -x map-ont {input.ref} {input.reads} | samtools view -bS -F 4 - | samtools sort -o {output} - && "
+        "samtools index {output}"
+
+rule align_trim:
+    input:
+        draft = rules.pre_map.output,
+        bed = workflow.current_basedir + '/rabvPeru2.scheme.bed'
+    params:
+        temp_file = config["output_path"] + "/binned_{sample}/{analysis_stem}/temp",
+        path_to_script = workflow.current_basedir
+    output:
+        report=config["output_path"]+"/binned_{sample}/{analysis_stem}/alignreport.txt",
+        report2=config["output_path"]+"/binned_{sample}/{analysis_stem}/alignreport.er",
+        bam=config["output_path"]+"/binned_{sample}/{analysis_stem}/primertrimmed.rg.sorted.bam"
+    shell:
+        "python {params.path_to_script}/align_trim.py {input.bed} --report {output.report} < {input.draft} 2> {output.report2} | samtools sort -T {params.temp_file} - -o {output.bam} &&"
+        "samtools index {output.bam}"
+
+rule create_trimmed_fastq:
+    input:
+        config["output_path"]+"/binned_{sample}/{analysis_stem}/primertrimmed.rg.sorted.bam"
+    output:
+        config["output_path"]+"/binned_{sample}/{analysis_stem}.primer_clipped.bam",
+    shell:
+        "/home/artic/ngsutilsj/dist/ngsutilsj bam-removeclipping -f --lenient --silent {input} {output}"
+
+rule bam_to_fastq:
+    input:
+        rules.create_trimmed_fastq.output
+    output:
+        config["output_path"]+"/binned_{sample}/{analysis_stem}.primer_trimmed.fastq"
+    shell:
+        "samtools fastq {input} > {output}"
 
 rule minimap2_racon0:
     input:
-        reads=rules.files.params.reads,
+        reads=rules.bam_to_fastq.output,
         ref=rules.files.params.ref
     output:
         config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.paf"
@@ -14,7 +55,7 @@ rule minimap2_racon0:
 
 rule racon1:
     input:
-        reads=rules.files.params.reads,
+        reads=rules.bam_to_fastq.output,
         fasta=rules.files.params.ref,
         paf= rules.minimap2_racon0.output
     output:
@@ -51,165 +92,10 @@ rule clean1:
         "--output_seq {output} "
         "--polish_round 1"
 
-rule minimap2_racon1:
-    input:
-        reads=rules.files.params.reads,
-        ref= rules.clean1.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.racon1.paf"
-    shell:
-        "minimap2 -x map-ont {input.ref} {input.reads} > {output}"
-
-rule racon2:
-    input:
-        reads=rules.files.params.reads,
-        fasta= rules.clean1.output,
-        paf= rules.minimap2_racon1.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon2.fasta"
-    shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
-
-
-rule mafft2:
-    input:
-       fasta = rules.racon2.output,
-       ref = rules.files.params.ref
-    params:
-        temp_file = config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/temp.racon2.fasta"
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon2.aln.fasta"
-    shell:
-        "cat {input.ref} {input.fasta} > {params.temp_file} && "
-        "mafft {params.temp_file} > {output} && "
-        "rm {params.temp_file}"
-
-rule clean2:
-    input:
-        aln = rules.mafft2.output,
-        cns = rules.racon2.output
-    params:
-        path_to_script = workflow.current_basedir,
-        seq_name = "{analysis_stem}"
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon2.clean.fasta"
-    shell:
-        "python {params.path_to_script}/clean.py "
-        "--alignment_with_ref {input.aln} "
-        "--name {params.seq_name} "
-        "--output_seq {output} "
-        "--polish_round 2"
-
-rule minimap2_racon2:
-    input:
-        reads=rules.files.params.reads,
-        ref= rules.clean2.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.racon2.paf"
-    shell:
-        "minimap2 -x map-ont {input.ref} {input.reads} > {output}"
-
-rule racon3:
-    input:
-        reads=rules.files.params.reads,
-        fasta= rules.clean2.output,
-        paf= rules.minimap2_racon2.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon3.fasta"
-    shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
-
-rule mafft3:
-    input:
-       fasta = rules.racon3.output,
-       ref = rules.files.params.ref
-    params:
-        temp_file = config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/temp.racon3.fasta"
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon3.aln.fasta"
-    shell:
-        "cat {input.ref} {input.fasta} > {params.temp_file} && "
-        "mafft {params.temp_file} > {output} && "
-        "rm {params.temp_file}"
-
-rule clean3:
-    input:
-        aln = rules.mafft3.output,
-        cns = rules.racon3.output
-    params:
-        path_to_script = workflow.current_basedir,
-        seq_name = "{analysis_stem}"
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon3.clean.fasta"
-    shell:
-        "python {params.path_to_script}/clean.py "
-        "--alignment_with_ref {input.aln} "
-        "--name {params.seq_name} "
-        "--output_seq {output} "
-        "--polish_round 3"
-
-
-rule minimap2_racon3:
-    input:
-        reads=rules.files.params.reads,
-        ref= rules.clean3.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.racon3.paf"
-    shell:
-        "minimap2 -x map-ont {input.ref} {input.reads} > {output}"
-
-rule racon4:
-    input:
-        reads=rules.files.params.reads,
-        fasta= rules.clean3.output,
-        paf= rules.minimap2_racon3.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon4.fasta"
-    shell:
-        "racon -m 8 -x -6 -g -8  --no-trimming -t 1 {input.reads} {input.paf} {input.fasta} > {output}"
-
-rule mafft4:
-    input:
-       fasta = rules.racon4.output,
-       ref = rules.files.params.ref
-    params:
-        temp_file = config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/temp.racon4.fasta"
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon4.aln.fasta"
-    shell:
-        "cat {input.ref} {input.fasta} > {params.temp_file} && "
-        "mafft {params.temp_file} > {output} && "
-        "rm {params.temp_file}"
-
-rule clean4:
-    input:
-        aln = rules.mafft4.output,
-        cns = rules.racon4.output
-    params:
-        path_to_script = workflow.current_basedir,
-        seq_name = "{analysis_stem}"
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/racon4.clean.fasta"
-    shell:
-        "python {params.path_to_script}/clean.py "
-        "--alignment_with_ref {input.aln} "
-        "--name {params.seq_name} "
-        "--output_seq {output} "
-        "--polish_round 4"
-
-rule minimap2_racon4:
-    input:
-        reads=rules.files.params.reads,
-        ref= rules.clean4.output
-    output:
-        config["output_path"] + "/binned_{sample}/polishing/{analysis_stem}/mapped.racon4.paf"
-    shell:
-        "minimap2 -x map-ont {input.ref} {input.reads} > {output}"
-
 rule medaka:
     input:
-        basecalls=rules.files.params.reads,
-        draft= rules.clean4.output
+        basecalls=rules.bam_to_fastq.output,
+        draft= rules.clean1.output
     params:
         outdir=config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}"
     output:
@@ -244,8 +130,8 @@ rule join_contigs_if_split:
                     joined_seq +="N"*int(gap)
                     last_end = end
                 joined_seq += record.seq
-                
-            fw.write(f">{name}\n{joined_seq}\n") 
+
+            fw.write(f">{name}\n{joined_seq}\n")
 
 
 rule mafft5:
@@ -267,7 +153,7 @@ rule clean5:
         cns = config["output_path"] + "/binned_{sample}/medaka/{analysis_stem}/consensus_combined.fasta"
     params:
         path_to_script = workflow.current_basedir,
-        seq_name = "{analysis_stem}"
+        seq_name = "{sample}"
     output:
         config["output_path"] + "/binned_{sample}/{analysis_stem}.consensus.fasta"
     shell:
@@ -276,4 +162,3 @@ rule clean5:
         "--name {params.seq_name} "
         "--output_seq {output} "
         "--polish_round medaka"
-

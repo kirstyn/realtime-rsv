@@ -3,10 +3,12 @@
     "description": "Amplicon based sequencing of rabies virus.",
     "url": "https://wellcomeopenresearch.org/articles/5-3",
     "displayOptions": {
-        "referencesLabel":"display_name"
+        "referencesLabel":"display_name",
+        "coverageThresholds": {
+          ">200x": 200, ">100x": 100, ">20x": 20, "0x": 0
+        }
     },
     "annotationOptions":{
-        "minimum_identity": "50",
         "reference_fields":"display_name[display_name]",
         "barcode_set":"native"
         }
